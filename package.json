@@ -1,7 +1,7 @@
 {
   "name": "@frlinw/modelize.js",
   "private": false,
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Model based api manager",
   "author": "Matthieu Dambrune <matthieu.dambrune@gmail.com>",
   "scripts": {
