@@ -1,0 +1,52 @@
+{
+  "name": "modelize.js",
+  "description": "Model based api management",
+  "author": "Matthieu Dambrune <matthieu.dambrune@gmail.com>",
+  "version": "0.1.0",
+  "private": false,
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint --fix src/**/*.{js}",
+    "build": "node --experimental-modules build/webpack.mjs"
+  },
+  "devDependencies": {
+    "eslint": "^5.5.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "rimraf": "^2.6.2",
+    "uglifyjs-webpack-plugin": "^1.3.0",
+    "webpack": "^4.17.2"
+  },
+  "browserslist": [
+    ">1%",
+    "not ie > 0"
+  ],
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "modules": false,
+          "useBuiltIns": "usage"
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 8
+    },
+    "rules": {
+      "no-multiple-empty-lines": "off"
+    }
+  }
+}
