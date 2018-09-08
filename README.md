@@ -90,67 +90,67 @@ field parameters
 Example of a User model
 
 ```javascript
-import { Modelize, TYPES } from 'CONFIG_FILE_PATH'
+import { Model, DataTypes } from 'CONFIG_FILE_PATH'
 
 import Sponsor from './Sponsor.js'
 import Profile from './Profile.js'
 import Guest from './Guest.js'
 
 
-class User extends Modelize.Model {
+class User extends Model {
   static init () {
     return super.init({
       id: {
-        type: TYPES.UUID,
+        type: DataTypes.UUID,
         pk: true
       },
       createdAt: {
-        type: TYPES.DATETIME
+        type: DataTypes.DATETIME
       },
       firstName: {
-        type: TYPES.STRING
+        type: DataTypes.STRING
       },
       lastName: {
-        type: TYPES.STRING
+        type: DataTypes.STRING
       },
       email: {
-        type: TYPES.EMAIL
+        type: DataTypes.EMAIL
       },
       password: {
-        type: TYPES.STRING
+        type: DataTypes.STRING
       },
       phone: {
-        type: TYPES.PHONE,
+        type: DataTypes.PHONE,
         allowBlank: true
       },
       address: {
-        type: TYPES.ADDRESS,
+        type: DataTypes.ADDRESS,
         allowBlank: true
       },
       role: {
-        type: TYPES.STRING
+        type: DataTypes.STRING
       },
       isActive: {
-        type: TYPES.BOOLEAN
+        type: DataTypes.BOOLEAN
       },
       // One-to-Many relation
       sponsor: {
-        type: TYPES.REFERENCE(Sponsor)
+        type: DataTypes.REFERENCE(Sponsor)
       },
       // One-to-One relation
       profile: {
-        type: TYPES.EXTENSION(Profile)
+        type: DataTypes.EXTENSION(Profile)
       },
       // Many-to-One relation
       friends: {
-        type: TYPES.COLLECTION(Friend)
+        type: DataTypes.COLLECTION(Friend)
       },
       // Virtual fields
       newEmail: {
-        type: TYPES.EMAIL
+        type: DataTypes.EMAIL
       },
       newPassword: {
-        type: TYPES.STRING
+        type: DataTypes.STRING
       }
     }, {
       endpoint: 'private/users'
