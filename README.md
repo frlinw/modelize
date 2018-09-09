@@ -14,13 +14,23 @@ Create a config file:
 - Override existing data types
 
 ```javascript
-import { Model, DataTypes } from '../node_modules/@frlinw/modelize.js/lib/index.js'
+import Modelize from '@/node_modules/@frlinw/modelize.js/lib/index.js'
+
+import { isMoment, strToMoment } from '@/src/services/date.js'
 
 
 // Config
-Model.config({
-  baseUrl: ENV.BACKEND_URL
+Modelize.Model.config({
+  baseUrl: ENV.BACKEND_URL,
+  // Support for moment date instead of native javascript Date
+  isDate: (value) => isMoment(value),
+  toDate: (moment) => moment.toDate(),
+  parseDate: (dateString) => strToMoment(dateString)
 })
+
+const Model = Modelize.Model
+const DataTypes = Model.DataTypes
+
 
 // Add a new type
 DataTypes.NEWTYPE = {
@@ -32,10 +42,6 @@ DataTypes.NEWTYPE = {
   // Format data Server to Client (JSON to JS) or Client to Client (JS to JS)
   formatForClient: (value) => value
 }
-
-// Override date types: moment compat
-DataTypes.DATE.formatForClient = (value) => moment(value)
-DataTypes.DATETIME.formatForClient = (value) => moment(value)
 
 
 export {
