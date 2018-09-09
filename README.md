@@ -14,83 +14,42 @@ Create a config file:
 - Override existing data types
 
 ```javascript
-import Modelize from '@/node_modules/@frlinw/modelize.js/lib/index.js'
+import { Model, DataTypes } from '../node_modules/@frlinw/modelize.js/lib/index.js'
 
-// Config all models
-Modelize.Model.config({
-  baseUrl: 'https://api.example.com'
+
+// Config
+Model.config({
+  baseUrl: ENV.BACKEND_URL
 })
 
-// Types
-const TYPES = Modelize.types
-
 // Add a new type
-TYPES.NEWTYPE = {
-  default: '' // or a function
+DataTypes.NEWTYPE = {
+  defaultValue: '' // or a function
   isValid: (value) => true
-  isBlank: (value) => value !== null
+  isBlank: (value) => value === ''
   // Format data Client to Server (JS to JSON)
   formatForServer: (value) => value
   // Format data Server to Client (JSON to JS) or Client to Client (JS to JS)
   formatForClient: (value) => value
 }
 
-// Override an existing type
-
-// Support for Moment dates instead of native Date type
-const DATEFORMAT = 'YYYY-MM-DD'
-TYPES.DATE.isValid = (value) => isDate(value)
-TYPES.DATE.formatForServer = (value) => (
-  isDate(value)
-    ? format(value, DATEFORMAT)
-    : value
-)
-TYPES.DATE.formatForClient = (value) => (
-  isString(value)
-    ? parse(value, DATEFORMAT)
-    : value
-)
-
-const DATETIMEFORMAT = 'YYYY-MM-DD[T]HH:mm:ssZ'
-TYPES.DATETIME.isValid = (value) => isDate(value)
-TYPES.DATETIME.formatForServer = (value) => (
-  isDate(value)
-    ? format(value, DATETIMEFORMAT)
-    : value
-)
-TYPES.DATETIME.formatForClient = (value) => (
-  isString(value)
-    ? parse(value, DATETIMEFORMAT)
-    : value
-)
+// Override date types: moment compat
+DataTypes.DATE.formatForClient = (value) => moment(value)
+DataTypes.DATETIME.formatForClient = (value) => moment(value)
 
 
 export {
-  Modelize,
-  TYPES
+  Model,
+  DataTypes
 }
 ```
 
 ## Model definition
 
-field parameters
-
-```javascript
-{
-  fieldname: {
-    type: // required | undefined
-    default: // optional | type.default
-    allowBlank: // optional | false
-    valid: // optional | (value, data) => true
-    pk: true // required for one field in the schema definition
-  }
-}
-```
-
 Example of a User model
 
 ```javascript
-import { Model, DataTypes } from 'CONFIG_FILE_PATH'
+import { Model, DataTypes } from '../config/modelize.js'
 
 import Sponsor from './Sponsor.js'
 import Profile from './Profile.js'
@@ -161,6 +120,20 @@ class User extends Model {
 
 
 export default User.init()
+```
+
+field options
+
+```javascript
+{
+  fieldname: {
+    type: // required | undefined
+    defaultValue: // optional | type.default
+    allowBlank: // optional | false
+    valid: // optional | (value, data) => true
+    pk: true // required for one field in the schema definition
+  }
+}
 ```
 
 ## Usage
