@@ -153,7 +153,7 @@ import User from '@/src/models/User.js'
 // Result fetched from api will mutate data
 
 // Collection of items
-const users = await User.buildCollection()
+const users = User.buildCollection()
 await users.getCollection({
   url: 'womens' // optional | ''
 })
@@ -166,7 +166,7 @@ users.$states.fetchFailure
 
 
 // Item
-const user = await User.build()
+const user = User.build()
 await user.get({
   pk: '10000' // required
 })
