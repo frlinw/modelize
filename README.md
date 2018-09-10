@@ -21,7 +21,7 @@ import moment from 'moment'
 
 // Config
 Modelize.Model.config({
-  baseUrl: ENV.BACKEND_URL,
+  baseUrl: 'https://api.example.com',
   // Support for moment date instead of native javascript Date
   isDate: (value) => moment.isMoment(value),
   toDate: (momentDate) => momentDate.toDate(),
