@@ -1,10 +1,10 @@
-# Modelize.js
+# Modelize
 
 Parse & valid data based on explicit model definition
 
 ## Installation
 
-`npm install @frlinw/modelize.js`
+`npm install @frlinw/modelize`
 
 ## Configuration
 
@@ -14,18 +14,18 @@ Create a config file:
 - Override existing data types
 
 ```javascript
-import Modelize from '@/node_modules/@frlinw/modelize.js/lib/index.js'
+import Modelize from '@/node_modules/@frlinw/modelize/index.js'
 
-import { isMoment, strToMoment } from '@/src/services/date.js'
+import moment from 'moment'
 
 
 // Config
 Modelize.Model.config({
   baseUrl: ENV.BACKEND_URL,
   // Support for moment date instead of native javascript Date
-  isDate: (value) => isMoment(value),
-  toDate: (moment) => moment.toDate(),
-  parseDate: (dateString) => strToMoment(dateString)
+  isDate: (value) => moment.isMoment(value),
+  toDate: (momentDate) => momentDate.toDate(),
+  parseDate: (dateString) => moment(dateString)
 })
 
 const Model = Modelize.Model
@@ -147,15 +147,38 @@ field options
 ```javascript
 import User from '@/src/models/User.js'
 
-// Request result will mutate user data
-// data will be reactives if you use it with Vue
-const users = await User.buildCollection()
-await users.getCollection()
 
+// Note:
+// Data will be reactives if you use it with Vue
+// Result fetched from api will mutate data
+
+// Collection of items
+const users = await User.buildCollection()
+await users.getCollection({
+  url: 'womens' // optional | ''
+})
+
+// Flags
+users.$states.fetchInProgress
+users.$states.fetchSuccess
+users.$states.fetchSuccessOnce
+users.$states.fetchFailure
+
+
+// Item
 const user = await User.build()
 await user.get({
-  pk: '10000' // required | null
+  pk: '10000' // required
 })
+
+// Flags
+user.$states.fetchInProgress
+user.$states.fetchSuccess
+user.$states.fetchSuccessOnce
+user.$states.fetchFailure
+user.$states.saveInProgress
+user.$states.saveSuccess
+user.$states.saveFailure
 
 // Data validation is required before .put, .post
 // A 'validationerror' event will be emitted on fail
@@ -183,13 +206,11 @@ user.valid([
   ]
 ])
 
-// put, post methods send data processed by .valid
-await user.put|post({
+// .put and .post methods send data processed by .valid
+// .save is a sugar for .put or .post
+await user.put|post|save({
   url: 'requestPassword' // optional | ''
   pk: 'bonjou@example.com' // optional | primary key field
 })
-
-// Sugar method: put or post depends of user origin (server or client side)
-await user.save()
 ```
 
