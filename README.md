@@ -1,6 +1,10 @@
 # Modelize
 
-Parse & valid data based on explicit model definition
+Model based interface for Rest API. Serialize, deserialize, transform and valid data.
+
+## TODO
+- Build & release workflow
+- Tests
 
 ## Installation
 
