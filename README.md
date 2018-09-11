@@ -71,7 +71,7 @@ class User extends Model {
     return super.init({
       id: {
         type: DataTypes.UUID,
-        pk: true
+        primaryKey: true
       },
       createdAt: {
         type: DataTypes.DATETIME
@@ -141,7 +141,7 @@ field options
     defaultValue: // optional | type.default
     allowBlank: // optional | false
     valid: // optional | (value, data) => true
-    pk: true // required for one field in the schema definition
+    primaryKey: true // required for one field in the schema definition
   }
 }
 ```
