@@ -42,9 +42,9 @@ DataTypes.NEWTYPE = {
   isValid: (value) => true
   isBlank: (value) => value === ''
   // Format data Client to Server (JS to JSON)
-  formatForServer: (value) => value
+  stringify: (value) => value
   // Format data Server to Client (JSON to JS) or Client to Client (JS to JS)
-  formatForClient: (value) => value
+  parse: (value) => value
 }
 
 
