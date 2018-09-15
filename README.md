@@ -2,10 +2,6 @@
 
 Model based interface for Rest API. Serialize, deserialize, transform and valid data.
 
-## TODO
-- Build & release workflow
-- Tests
-
 ## Installation
 
 `npm install @frlinw/modelize`
@@ -321,3 +317,6 @@ export default {
 
 ```
 
+## TODO
+- Build & release workflow
+- Tests
