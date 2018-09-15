@@ -1,6 +1,6 @@
 # Modelize
 
-Model based interface for Rest API. Serialize, deserialize, transform and valid data.
+Model based interface for Rest API. Retrieve, parse, valid, transform and save data.
 
 ## Installation
 
