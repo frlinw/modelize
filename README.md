@@ -154,6 +154,7 @@ UserEdit.vue
 <script>
 
 import User from '@/src/models/User.js'
+import Plan from '@/src/models/Plan.js'
 
 
 export default {
