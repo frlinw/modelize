@@ -166,9 +166,9 @@ export default {
 
   data () {
     return {
-      // Create a new empty user
+      // Create a new user with default values
       user: User.build(),
-      // Create an empty collection of availables plans
+      // Create an empty collection of your app plans
       plans: Plan.buildCollection()
     }
   },
@@ -231,7 +231,7 @@ export default {
           },
           // Nested validation of collection
           [
-            'plan', [
+            'plans', [
               'name',
               'price'
             ]
