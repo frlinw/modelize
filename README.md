@@ -146,75 +146,176 @@ field options
 }
 ```
 
-## Usage
+## Example in Vue
+
+UserEdit.vue
 
 ```javascript
+<script>
+
 import User from '@/src/models/User.js'
 
 
-// Note:
-// Data will be reactives if you use it with Vue
-// Result fetched from api will mutate data
-
-// Collection of items
-const users = User.buildCollection()
-await users.getCollection({
-  url: 'womens' // optional | ''
-})
-
-// Flags
-users.$states.fetchInProgress
-users.$states.fetchSuccess
-users.$states.fetchSuccessOnce
-users.$states.fetchFailure
-
-
-// Item
-const user = User.build()
-await user.get({
-  pk: '10000' // required
-})
-
-// Flags
-user.$states.fetchInProgress
-user.$states.fetchSuccess
-user.$states.fetchSuccessOnce
-user.$states.fetchFailure
-user.$states.saveInProgress
-user.$states.saveSuccess
-user.$states.saveFailure
-
-// Data validation is required before .put, .post
-// A 'validationerror' event will be emitted on fail
-user.valid([
-  // Validation of direct field
-  'firstName',
-  // Nested validation of extension
-  {
-    'profile': [
-      'picture'
-    ]
+export default {
+  props: {
+    id: {
+      type: String
+    }
   },
-  // Nested validation of reference
-  {
-    'sponsor': [
-      'name'
-    ]
-  },
-  // Nested validation of collection
-  [
-    'friends', [
-      'firstName',
-      'kindness'
-    ]
-  ]
-])
 
-// .put and .post methods send data processed by .valid
-// .save is a sugar for .put or .post
-await user.put|post|save({
-  url: 'requestPassword' // optional | ''
-  pk: 'bonjou@example.com' // optional | primary key field
-})
+  data () {
+    return {
+      // Create a new empty user
+      user: User.build(),
+      // Create an empty collection of availables plans
+      plans: Plan.buildCollection()
+    }
+  },
+
+  async created () {
+    // Note:
+    // Data will be reactives
+    // Result fetched from api will mutate data
+
+    // Get all plans of your app
+    // Options:
+    // {
+    //   url: '' // optional
+    // }
+    // Flags:
+    // this.plans.$states.fetchInProgress
+    // this.plans.$states.fetchSuccess
+    // this.plans.$states.fetchSuccessOnce
+    // this.plans.$states.fetchFailure
+    await this.plans.getCollection()
+
+    if (this.id) {
+      // Get the existing user if there is an id in the URL
+      // Options:
+      // {
+      //   pk: '', // required
+      //   url: '' // optional
+      // }
+      // Flags:
+      // this.user.$states.fetchInProgress
+      // this.user.$states.fetchSuccess
+      // this.user.$states.fetchSuccessOnce
+      // this.user.$states.fetchFailure
+      // this.user.$states.saveInProgress
+      // this.user.$states.saveSuccess
+      // this.user.$states.saveFailure
+      await this.user.get({ pk: this.id })
+    }
+  },
+
+  methods: {
+    async saveUser () {
+      if (
+        // Data validation is required before .put, .post
+        // A 'validationerror' event will be emitted on fail
+        this.user.valid([
+          // Validation of direct field
+          'firstName',
+          // Nested validation of extension
+          {
+            'profile': [
+              'picture'
+            ]
+          },
+          // Nested validation of reference
+          {
+            'sponsor': [
+              'code'
+            ]
+          },
+          // Nested validation of collection
+          [
+            'plan', [
+              'name',
+              'price'
+            ]
+          ]
+        ])
+      ) {
+        // .save() is a syntax sugar for .put() or .post()
+        // {
+        //   pk: '' // optional. default is primary key field.
+        //   url: '' // optional
+        // }
+        await this.user.save()
+
+        if (this.user.$states.saveSuccess) {
+          if (this.id) {
+            console.log('Yeah! user updated !')
+          } else {
+            console.log('Yeah! user created !')
+          }
+        }
+      }
+    }
+  }
+}
+
+</script>
+```
+```html
+<template>
+
+  <div>
+    <h1>User example</h1>
+
+    <form
+      id="user-edit"
+      @submit.prevent="saveUser()"
+    >
+      <div :class="{ 'form-error': user.error('firstName') }">
+        <input
+          v-model="user.firstName"
+          type="text"
+          placeholder="Firstname"
+        >
+      </div>
+
+      <div :class="{ 'form-error': user.profile.error('picture') }">
+        <input
+          v-model="user.profile.picture"
+          type="file"
+          placeholder="Avatar"
+        >
+      </div>
+
+      <div :class="{ 'form-error': user.sponsor.error('code') }">
+        <input
+          v-model="user.sponsor.code"
+          type="text"
+          placeholder="Sponsor code"
+        >
+      </div>
+
+      <div :class="{ 'form-error': user.error('plans') }">
+        <div
+          v-for="plan in plans.items()"
+          :key="plan.id"
+        >
+          <label>
+            <input
+              type="checkbox"
+              :value="user.plans.exists(plan)"
+              @change="user.plans.toggle(plan)"
+            >
+            {{plan.name}} - {{plan.price}}
+          </label>
+        </div>
+      </div>
+
+      <button type="submit">
+        <span v-if="user.$states.saveInProgress">Save in progress</span>
+        <span v-else>Save</span>
+      </button>
+    </form>
+  </div>
+
+</template>
+
 ```
 
