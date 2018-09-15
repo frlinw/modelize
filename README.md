@@ -11,7 +11,6 @@ Model based interface for Rest API. Retrieve, parse, valid, transform and save d
 Create a config file:
 - Config the base url for api call
 - Add new data types
-- Override existing data types
 
 ```javascript
 import Modelize from '@/node_modules/@frlinw/modelize/index.js'
@@ -22,6 +21,7 @@ import moment from 'moment'
 // Config
 Modelize.Model.config({
   baseUrl: 'https://api.example.com',
+  requireAuth: true,
   getAuthToken: () => localStorage.get('authToken'),
   // Support for moment date instead of native javascript Date
   isDate: (value) => moment.isMoment(value),
