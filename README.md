@@ -64,7 +64,7 @@ import { Model, DataTypes } from '../config/modelize.js'
 
 import Sponsor from './Sponsor.js'
 import Profile from './Profile.js'
-import Guest from './Guest.js'
+import Plan from './Plan.js'
 
 
 class User extends Model {
@@ -112,8 +112,8 @@ class User extends Model {
         type: DataTypes.EXTENSION(Profile)
       },
       // Many-to-One relation
-      friends: {
-        type: DataTypes.COLLECTION(Friend)
+      plans: {
+        type: DataTypes.COLLECTION(Plan)
       },
       // Virtual fields
       newEmail: {
