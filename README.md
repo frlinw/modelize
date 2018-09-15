@@ -26,6 +26,7 @@ import moment from 'moment'
 // Config
 Modelize.Model.config({
   baseUrl: 'https://api.example.com',
+  getAuthToken: () => localStorage.get('authToken'),
   // Support for moment date instead of native javascript Date
   isDate: (value) => moment.isMoment(value),
   toDate: (momentDate) => momentDate.toDate(),
