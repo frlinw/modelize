@@ -138,7 +138,7 @@ field options
 ```javascript
 {
   fieldname: {
-    type: // required | undefined
+    type: // required
     defaultValue: // optional | type.default
     allowBlank: // optional | false
     valid: // optional | (value, data) => true
