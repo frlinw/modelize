@@ -23,7 +23,7 @@ import moment from 'moment'
 
 
 // Config
-Modelize.Model.config({
+Modelize.config({
   baseUrl: 'https://api.example.com',
   requireAuth: true,
   getAuthToken: () => localStorage.get('authToken'),
@@ -33,26 +33,21 @@ Modelize.Model.config({
   parseDate: (dateString) => moment(dateString)
 })
 
-const Model = Modelize.Model
-const DataTypes = Model.DataTypes
-
 
 // Add a new type
-DataTypes.NEWTYPE = {
+Modelize.addDataType('NEWTYPE', {
   defaultValue: '' // or a function
   isValid: (value) => true
   isBlank: (value) => value === ''
-  // Format data Client to Server (JS to JSON)
-  stringify: (value) => value
-  // Format data Server to Client (JSON to JS) or Client to Client (JS to JS)
-  parse: (value) => value
-}
+  // Format data before save
+  beforeSave: (value) => value
+  // Format data after fetch / before build
+  afterFetch: (value) => value
+})
 
 
-export {
-  Model,
-  DataTypes
-}
+const Model = Modelize.Model
+const DataTypes = Modelize.DataTypes
 ```
 
 ## Model definition
