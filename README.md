@@ -1,6 +1,10 @@
 # Modelize
 
-Model based interface for Rest API. Retrieve, parse, valid, transform and save data.
+Model based Rest API manager.
+
+Retrieve, parse, valid, transform and save data.
+
+Full featured & designed to be reactive in [Vue](https://vuejs.org/).
 
 ## Installation
 
