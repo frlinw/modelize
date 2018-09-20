@@ -1,6 +1,4 @@
-import Model from './lib/model.js'
+import Modelize from './lib/modelize.js'
 
 
-export default {
-  Model
-}
+export default Modelize
