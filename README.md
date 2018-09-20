@@ -6,6 +6,10 @@ Model based interface for Rest API. Retrieve, parse, valid, transform and save d
 
 `npm install @frlinw/modelize`
 
+## TODO
+- Build & release workflow
+- Tests
+
 ## Configuration
 
 Create a config file:
@@ -13,7 +17,7 @@ Create a config file:
 - Add new data types
 
 ```javascript
-import Modelize from '@/node_modules/@frlinw/modelize/index.js'
+import Modelize from '@frlinw/modelize'
 
 import moment from 'moment'
 
@@ -134,7 +138,7 @@ field options
 ```javascript
 {
   fieldname: {
-    type: // required | undefined
+    type: // required
     defaultValue: // optional | type.default
     allowBlank: // optional | false
     valid: // optional | (value, data) => true
@@ -316,7 +320,3 @@ export default {
 </template>
 
 ```
-
-## TODO
-- Build & release workflow
-- Tests
