@@ -45,8 +45,8 @@ Modelize.addDataType('NEWTYPE', {
   isBlank: (value) => value === ''
   // Format data before save
   beforeSave: (value) => value
-  // Format data after fetch / before build
-  afterFetch: (value) => value
+  // Format data before build
+  beforeBuild: (value) => value
 })
 
 
@@ -259,6 +259,7 @@ export default {
 
 </script>
 ```
+
 ```html
 <template>
 
@@ -266,7 +267,7 @@ export default {
     <h1>User example</h1>
 
     <form
-      id="user-edit"
+      id="UserEdit"
       @submit.prevent="saveUser()"
     >
       <div :class="{ 'form-error': user.error('firstName') }">
