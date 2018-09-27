@@ -104,15 +104,15 @@ class User extends Model {
       },
       // One-to-Many relation
       sponsor: {
-        type: DataTypes.REFERENCE(Sponsor)
+        type: DataTypes.BELONGSTO(Sponsor)
       },
       // One-to-One relation
       profile: {
-        type: DataTypes.EXTENSION(Profile)
+        type: DataTypes.HASONE(Profile)
       },
       // Many-to-One relation
       plans: {
-        type: DataTypes.COLLECTION(Plan)
+        type: DataTypes.HASMANY(Plan)
       },
       // Virtual fields
       newEmail: {
