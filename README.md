@@ -14,11 +14,7 @@ Full featured & designed to work with [Vue](https://vuejs.org/) reactivity syste
 - Build & release workflow
 - Tests
 
-## Configuration
-
-Create a config file:
-- Config the base url for api call
-- Add new data types
+## Create a configuration file
 
 ```javascript
 import Modelize from '@frlinw/modelize'
@@ -26,12 +22,16 @@ import Modelize from '@frlinw/modelize'
 import moment from 'moment'
 
 
-// Config
+// Main config
 Modelize.config({
+  // Base URL for API call
   baseUrl: 'https://api.example.com',
+  // Active authorization header for every API call
+  // getAuthToken method is required if requireAuth is set to true
   requireAuth: true,
   getAuthToken: () => localStorage.get('authToken'),
-  // Support for moment date instead of native javascript Date
+  // Modelize support native javascript Date but you can override isDate, toDate & parseDate methods to support an other date lib
+  // example for moment
   isDate: (value) => moment.isMoment(value),
   toDate: (momentDate) => momentDate.toDate(),
   parseDate: (dateString) => moment(dateString)
@@ -40,7 +40,7 @@ Modelize.config({
 
 // Add a new type
 Modelize.addDataType('NEWTYPE', {
-  defaultValue: '' // or a function
+  defaultValue: '' // primitive value or function
   isValid: (value) => true
   isBlank: (value) => value === ''
   // Format data before save
