@@ -50,8 +50,8 @@ Modelize.addDataType('NEWTYPE', {
 })
 
 
-const Model = Modelize.Model
-const DataTypes = Modelize.DataTypes
+export const Model = Modelize.Model
+export const DataTypes = Modelize.DataTypes
 ```
 
 ## Model definition
