@@ -30,7 +30,8 @@ Modelize.config({
   // getAuthToken method is required if requireAuth is set to true
   requireAuth: true,
   getAuthToken: () => localStorage.get('authToken'),
-  // Modelize support native javascript Date but you can override isDate, toDate & parseDate methods to support an other date lib
+  // Modelize support native javascript Date
+  // you can override isDate, toDate & parseDate methods to support your favorite date lib
   // example for moment
   isDate: (value) => moment.isMoment(value),
   toDate: (momentDate) => momentDate.toDate(),
@@ -217,19 +218,19 @@ export default {
         this.user.valid([
           // Validation of direct field
           'firstName',
-          // Nested validation of extension
-          {
-            'profile': [
-              'picture'
-            ]
-          },
-          // Nested validation of reference
+          // Nested validation of BELONGSTO
           {
             'sponsor': [
               'code'
             ]
           },
-          // Nested validation of collection
+          // Nested validation of HASONE
+          {
+            'profile': [
+              'picture'
+            ]
+          },
+          // Nested validation of HASMANY
           [
             'plans', [
               'name',
