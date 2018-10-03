@@ -4,6 +4,14 @@
   "version": "0.6.23",
   "description": "Model based REST Api Manager",
   "author": "Matthieu Dambrune <matthieu.dambrune@gmail.com>",
+  "keywords": [
+    "model",
+    "rest",
+    "api",
+    "valid",
+    "parse",
+    "transform"
+  ],
   "scripts": {
     "lint": "eslint --fix lib/**/*.js"
   },
