@@ -179,6 +179,8 @@ export default {
     // Data will be reactives
     // Result fetched from api will mutate data
 
+    // A 'ModelizeFetchError' event will be emitted if there is a fail from the Fetch API
+
     // Get all plans of your app
     // Options:
     // {
@@ -214,7 +216,7 @@ export default {
     async saveUser () {
       if (
         // Data validation is required before .put, .post
-        // A 'validationerror' event will be emitted on fail
+        // A 'ModelizeValidationError' event will be emitted on fail
         this.user.valid([
           // Validation of direct field
           'firstName',
