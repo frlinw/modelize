@@ -4,7 +4,7 @@ Model based Rest API manager.
 
 Retrieve, parse, valid, transform and save data.
 
-Full featured & designed to work with [Vue](https://vuejs.org/) reactivity system.
+Designed to work with [Vue](https://vuejs.org/) reactivity system.
 
 ## Installation
 
@@ -19,8 +19,6 @@ Full featured & designed to work with [Vue](https://vuejs.org/) reactivity syste
 ```javascript
 import Modelize from '@frlinw/modelize'
 
-import moment from 'moment'
-
 
 // Main config
 Modelize.config({
@@ -29,13 +27,7 @@ Modelize.config({
   // Active authorization header for every API call
   // getAuthToken method is required if requireAuth is set to true
   requireAuth: true,
-  getAuthToken: () => localStorage.get('authToken'),
-  // Modelize support native javascript Date
-  // you can override isDate, toDate & parseDate methods to support your favorite date lib
-  // example for moment
-  isDate: (value) => moment.isMoment(value),
-  toDate: (momentDate) => momentDate.toDate(),
-  parseDate: (dateString) => moment(dateString)
+  getAuthToken: () => localStorage.get('authToken')
 })
 
 
