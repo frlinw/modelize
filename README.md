@@ -160,9 +160,9 @@ export default {
   data () {
     return {
       // Create a new user with default values
-      user: User.build(),
+      user: new User({}),
       // Create an empty collection of your app plans
-      plans: Plan.buildCollection()
+      plans: new Plan([])
     }
   },
 
