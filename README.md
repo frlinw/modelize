@@ -179,10 +179,10 @@ export default {
     //   url: '' // optional
     // }
     // Flags:
-    // this.plans.$states.fetchInProgress
-    // this.plans.$states.fetchSuccess
-    // this.plans.$states.fetchSuccessOnce
-    // this.plans.$states.fetchFailure
+    // this.plans.fetchInProgress()
+    // this.plans.fetchSuccess()
+    // this.plans.fetchSuccessOnce()
+    // this.plans.fetchFailure()
     await this.plans.getCollection()
 
     if (this.id) {
@@ -193,13 +193,13 @@ export default {
       //   url: '' // optional
       // }
       // Flags:
-      // this.user.$states.fetchInProgress
-      // this.user.$states.fetchSuccess
-      // this.user.$states.fetchSuccessOnce
-      // this.user.$states.fetchFailure
-      // this.user.$states.saveInProgress
-      // this.user.$states.saveSuccess
-      // this.user.$states.saveFailure
+      // this.user.fetchInProgress()
+      // this.user.fetchSuccess()
+      // this.user.fetchSuccessOnce()
+      // this.user.fetchFailure()
+      // this.user.saveInProgress()
+      // this.user.saveSuccess()
+      // this.user.saveFailure()
       await this.user.get({ pk: this.id })
     }
   },
@@ -240,7 +240,7 @@ export default {
         // }
         await this.user.save()
 
-        if (this.user.$states.saveSuccess) {
+        if (this.user.saveSuccess()) {
           if (this.id) {
             console.log('Yeah! user updated !')
           } else {
@@ -306,7 +306,7 @@ export default {
       </div>
 
       <button type="submit">
-        <span v-if="user.$states.saveInProgress">Save in progress</span>
+        <span v-if="user.saveInProgress()">Save in progress</span>
         <span v-else>Save</span>
       </button>
     </form>
