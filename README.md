@@ -133,7 +133,7 @@ field options
     type: // required
     defaultValue: // optional | type.default
     allowBlank: // optional | false
-    valid: // optional | (value, data) => true
+    isValid: // optional | (value, data) => true
     primaryKey: true // required for one field in the schema definition
   }
 }
