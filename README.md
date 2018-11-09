@@ -291,7 +291,7 @@ export default {
 
       <div :class="{ 'form-error': user.error('plans') }">
         <div
-          v-for="plan in plans.items()"
+          v-for="plan of plans.items()"
           :key="plan.id"
         >
           <label>
