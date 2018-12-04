@@ -95,17 +95,17 @@ class User extends Model {
       isActive: {
         type: DataTypes.BOOLEAN
       },
-      // One-to-Many relation
-      sponsor: {
-        type: DataTypes.BELONGSTO(Sponsor)
-      },
       // One-to-One relation
       profile: {
         type: DataTypes.HASONE(Profile)
       },
-      // Many-to-One relation
+      // One-to-Many relation
       plans: {
         type: DataTypes.HASMANY(Plan)
+      },
+      // Many-to-One relation
+      sponsor: {
+        type: DataTypes.BELONGSTO(Sponsor)
       },
       // Virtual fields
       newEmail: {
