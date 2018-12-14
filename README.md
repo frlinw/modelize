@@ -181,7 +181,7 @@ export default {
     // Flags:
     // this.plans.fetchInProgress
     // this.plans.fetchSuccess
-    // this.plans.fetchSuccessOnce()
+    // this.plans.fetchSuccessOnce
     // this.plans.fetchFailure
     await this.plans.getCollection()
 
@@ -195,7 +195,7 @@ export default {
       // Flags:
       // this.user.fetchInProgress
       // this.user.fetchSuccess
-      // this.user.fetchSuccessOnce()
+      // this.user.fetchSuccessOnce
       // this.user.fetchFailure
       // this.user.saveInProgress
       // this.user.saveSuccess
