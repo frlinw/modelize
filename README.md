@@ -25,9 +25,9 @@ Modelize.config({
   // Base URL for API call
   baseUrl: 'https://api.example.com',
   // Active authorization header for every API call
-  // getAuthToken method is required if requireAuth is set to true
+  // authToken is required if requireAuth is set to true
   requireAuth: true,
-  getAuthToken: () => localStorage.get('authToken')
+  authToken: () => localStorage.get('authToken')
 })
 
 
@@ -179,10 +179,10 @@ export default {
     //   url: '' // optional
     // }
     // Flags:
-    // this.plans.fetchInProgress()
-    // this.plans.fetchSuccess()
+    // this.plans.fetchInProgress
+    // this.plans.fetchSuccess
     // this.plans.fetchSuccessOnce()
-    // this.plans.fetchFailure()
+    // this.plans.fetchFailure
     await this.plans.getCollection()
 
     if (this.id) {
@@ -193,13 +193,13 @@ export default {
       //   url: '' // optional
       // }
       // Flags:
-      // this.user.fetchInProgress()
-      // this.user.fetchSuccess()
+      // this.user.fetchInProgress
+      // this.user.fetchSuccess
       // this.user.fetchSuccessOnce()
-      // this.user.fetchFailure()
-      // this.user.saveInProgress()
-      // this.user.saveSuccess()
-      // this.user.saveFailure()
+      // this.user.fetchFailure
+      // this.user.saveInProgress
+      // this.user.saveSuccess
+      // this.user.saveFailure
       await this.user.get({ pk: this.id })
     }
   },
@@ -240,7 +240,7 @@ export default {
         // }
         await this.user.save()
 
-        if (this.user.saveSuccess()) {
+        if (this.user.saveSuccess) {
           if (this.id) {
             console.log('Yeah! user updated !')
           } else {
@@ -306,7 +306,7 @@ export default {
       </div>
 
       <button type="submit">
-        <span v-if="user.saveInProgress()">Save in progress</span>
+        <span v-if="user.saveInProgress">Save in progress</span>
         <span v-else>Save</span>
       </button>
     </form>

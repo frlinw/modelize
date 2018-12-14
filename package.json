@@ -33,6 +33,9 @@
     },
     "rules": {
       "no-multiple-empty-lines": "off"
+    },
+    "env": {
+      "browser": true
     }
   }
 }
