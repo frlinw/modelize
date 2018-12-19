@@ -213,24 +213,18 @@ export default {
           // Validation of direct field
           'firstName',
           // Nested validation of BELONGSTO
-          {
-            'sponsor': [
+          ['sponsor', [
               'code'
-            ]
-          },
+          ]],
           // Nested validation of HASONE
-          {
-            'profile': [
-              'picture'
-            ]
-          },
+          ['profile', [
+            'picture'
+          ]],
           // Nested validation of HASMANY
-          [
-            'plans', [
-              'name',
-              'price'
-            ]
-          ]
+          ['plans', [
+            'name',
+            'price'
+          ]]
         ])
       ) {
         // .save() is a syntax sugar for .put() or .post()
