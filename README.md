@@ -176,7 +176,7 @@ export default {
     // Get all plans of your app
     // Options:
     // {
-    //   url: '' // optional
+    //   action: '' // optional
     // }
     // Flags:
     // this.plans.fetchInProgress
@@ -190,7 +190,7 @@ export default {
       // Options:
       // {
       //   pk: '', // required
-      //   url: '' // optional
+      //   action: '' // optional
       // }
       // Flags:
       // this.user.fetchInProgress
@@ -230,7 +230,7 @@ export default {
         // .save() is a syntax sugar for .put() or .post()
         // {
         //   pk: '' // optional. default is primary key field.
-        //   url: '' // optional
+        //   action: '' // optional
         // }
         await this.user.save()
 
