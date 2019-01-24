@@ -1,7 +1,7 @@
 {
   "name": "@frlinw/modelize",
   "private": false,
-  "version": "0.20.5",
+  "version": "0.20.6",
   "description": "Model based REST Api Manager",
   "author": "Matthieu Dambrune <matthieu.dambrune@gmail.com>",
   "keywords": [
