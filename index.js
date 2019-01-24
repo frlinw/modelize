@@ -1,4 +1,5 @@
-import Modelize from './lib/modelize.js'
+import Model from './lib/model.js'
+import DataTypes from './lib/datatypes.js'
 
 
-export default Modelize
+export default { Model, DataTypes }
