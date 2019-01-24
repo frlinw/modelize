@@ -4,24 +4,23 @@ Model based Rest API manager.
 
 Retrieve, parse, valid, transform and save data.
 
-Designed to work with [Vue](https://vuejs.org/) reactivity system.
-
 ## Installation
 
 `npm install @frlinw/modelize`
 
-## TODO
-- Build & release workflow
-- Tests
+## Usage
 
-## Create a configuration file
+### Create a configuration file
 
 ```javascript
 import Modelize from '@frlinw/modelize'
 
 
 // Main config
-Modelize.config({
+const Model = Modelize.Model
+const DataTypes = Modelize.DataTypes
+
+Model.config({
   // Base URL for API call
   baseUrl: 'https://api.example.com',
   // Active authorization header for every API call
@@ -31,25 +30,13 @@ Modelize.config({
 })
 
 
-// Add a new type
-Modelize.addDataType('NEWTYPE', {
-  defaultValue: '' // primitive value or function
-  isValid: (value) => true
-  isBlank: (value) => value === ''
-  // Format data before save
-  beforeSave: (value) => value
-  // Format data before build
-  beforeBuild: (value) => value
-})
-
-
-export const Model = Modelize.Model
-export const DataTypes = Modelize.DataTypes
+export {
+  Model,
+  DataTypes
+}
 ```
 
-## Model definition
-
-Example of a User model
+### Define your models
 
 ```javascript
 import { Model, DataTypes } from '../config/modelize.js'
@@ -63,8 +50,11 @@ class User extends Model {
   static init () {
     return super.init({
       id: {
-        type: DataTypes.UUID,
-        primaryKey: true
+        type: DataTypes.UUID, // required
+        primaryKey: true, // only once per model
+        // defaultValue: // optional | defaultValue from `type` option
+        // allowBlank: // optional | false
+        // isValid: // optional | (value, data) => true
       },
       createdAt: {
         type: DataTypes.DATETIME
@@ -125,23 +115,7 @@ class User extends Model {
 export default User.init()
 ```
 
-field options
-
-```javascript
-{
-  fieldname: {
-    type: // required
-    defaultValue: // optional | type.default
-    allowBlank: // optional | false
-    isValid: // optional | (value, data) => true
-    primaryKey: true // required for one field in the schema definition
-  }
-}
-```
-
-## Example in Vue
-
-UserEdit.vue
+### Manage your data
 
 ```javascript
 <script>
@@ -171,7 +145,7 @@ export default {
     // Data will be reactives
     // Result fetched from api will mutate data
 
-    // A 'ModelizeFetchError' event will be emitted if there is a fail from the Fetch API
+
 
     // Get all plans of your app
     // Options:
@@ -184,6 +158,8 @@ export default {
     // this.plans.fetchSuccessOnce
     // this.plans.fetchFailure
     await this.plans.getCollection()
+
+    // A 'ModelizeFetchError' event will be emitted if there is a fail from the Fetch API
 
     if (this.id) {
       // Get the existing user if there is an id in the URL
@@ -248,7 +224,6 @@ export default {
 
 </script>
 ```
-
 ```html
 <template>
 
@@ -307,5 +282,8 @@ export default {
   </div>
 
 </template>
-
 ```
+
+## TODO
+- Build & release workflow
+- Tests
