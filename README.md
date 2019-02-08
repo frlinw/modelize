@@ -12,6 +12,8 @@ Retrieve, parse, valid, transform and save data.
 
 ### Create a configuration file
 
+config.js
+
 ```javascript
 import Modelize from '@frlinw/modelize'
 
@@ -38,8 +40,10 @@ export {
 
 ### Define your models
 
+User.js
+
 ```javascript
-import { Model, DataTypes } from '../config/modelize.js'
+import { Model, DataTypes } from './config.js'
 
 import Sponsor from './Sponsor.js'
 import Profile from './Profile.js'
@@ -117,11 +121,13 @@ export default User.init()
 
 ### Manage your data
 
+UserEdit.vue
+
 ```javascript
 <script>
 
-import User from '@/src/models/User.js'
-import Plan from '@/src/models/Plan.js'
+import User from './User.js'
+import Plan from './Plan.js'
 
 
 export default {
